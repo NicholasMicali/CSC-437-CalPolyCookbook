@@ -1,0 +1,115 @@
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  }
+
+  img {
+  max-width: 100%;
+  }
+  
+
+body {
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  background-color: beige;
+  color: black;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+.light-mode {
+  background-color: beige;
+  color: black;
+}
+
+.dark-link {
+  color: cyan;
+}
+
+.light-link {
+  color: blue;
+}
+
+svg.icon {
+  display: inline;
+  height: 2em;
+  width: 2em;
+  vertical-align: top;
+  fill: currentColor;
+}
+
+article {
+  padding-bottom: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+.subHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.profilePic {
+  height: 30px;
+  width: 30px;
+}
+
+h1 {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+
+.section {
+  font-weight: 400;
+}
+
+.cuisineImg {
+  width: 700px; 
+  margin-bottom: 50px; 
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.recipe {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-bottom: 30px;
+}
+
+.Recipes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RecipeRow {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+
+
