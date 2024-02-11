@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/styles/page.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Montserrat:ital,wght@0,300;0,400;0,700;1,400&family=Open+Sans:ital,wght@1,300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="./drop-down.ts"></script>
+    <script type="module" src="./toggle-switch.ts"></script>
+  </head>
+  <body>
+    <article>
+      <header>
+        <div class="subHeader">
+          <div>World CB</div>
+          <svg class="icon">
+            <use href="/icons/cooking.svg#icon-cook" />
+          </svg>
+        </div>
+        <a href="index.html">Home</a>
+        <div class="subHeader">
+          <drop-down>
+            nick_micali
+            <ul slot="menu">
+              <li>Profile</li>
+              <li>Saved</li>
+              <li>Settings</li>
+              <li><toggle-switch>Mode</toggle-switch></li>
+              <li>Sign out</li>
+            </ul>
+          </drop-down>
+          <img class="profilePic" src="/images/profile.webp"/>
+        </div>
+      </header>
+      <h1>Fried Rice</h1>
+      <div class="recipe">
+        <section class="Ingredients">
+          <h2>Ingredients:</h2>
+          <svg class="icon">
+            <use href="/icons/cooking.svg#icon-measure" />
+          </svg>
+          <ul>
+            <li><div>Day old rice</div><div>2 cups</div></li>
+            <li><div>2 whole eggs</div></li>
+            <li><div>peas and carrots</div><div>1 Cup</div></li>
+            <li><div>green onions</div><div>1/2 Cups</div></li>
+          </ul>
+        </section>
+        <section class="Instructions">
+          <h2>Instructions:</h2>
+          <svg class="icon">
+            <use href="/icons/cooking.svg#icon-mix" />
+          </svg>
+          <ul>
+            <li>Start by heating a large pan with olive oil on high</li>
+            <li>add rice and stir to brown the rice</li>
+            <li>add fish sause and spices of choice</li>
+            <li>add egg to rice and stir</li>
+            <li>add vegtables, turn the heat down and stir</li>
+            <li>garnish with green onions and serve</li>
+          </ul>
+        </section>
+      </div>
+      <a href="asian.html">Other Recipes</a>
+    </article>
+  </body>
+</html>
