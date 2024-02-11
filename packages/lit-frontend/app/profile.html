@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/styles/page.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kolker+Brush&family=Montserrat:ital,wght@0,300;0,400;0,700;1,400&family=Open+Sans:ital,wght@1,300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="./drop-down.ts"></script>
+    <script type="module" src="./toggle-switch.ts"></script>
+    <script type="module" src="./recipe-card.ts"></script>
+    <script type="module" src="./filter-control.ts"></script>
+    <script type="module" src="./cuisine-card.ts"></script>
+    <script type="module" src="./user-profiles.ts"></script>
+  </head>
+  <body>
+    <article>
+      <header>
+        <div class="subHeader">
+          <div>World CB</div>
+          <svg class="icon">
+            <use href="/icons/cooking.svg#icon-cook" />
+          </svg>
+        </div>
+        <a href="index.html">Home</a>
+        <div class="subHeader">
+          <drop-down>
+            nick_micali
+            <ul slot="menu">
+              <li>Profile</li>
+              <li>Saved</li>
+              <li>Settings</li>
+              <li><toggle-switch>Mode</toggle-switch></li>
+              <li>Sign out</li>
+            </ul>
+          </drop-down>
+          <img class="profilePic" src="/images/profile.webp"/>
+        </div>
+      </header>
+      <h1>Cookbook From Around The World</h1>
+      <section class="section">
+        <user-profile path="/profile/cook"></user-profile>
+        <user-profile-edit path="/profile/cook"></user-profile-edit>
+      </section>
+    </article>    
+  </body>
+</html>
