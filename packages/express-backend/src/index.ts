@@ -8,39 +8,34 @@ import { Profile } from "./models/profile";
 import { Recipe } from "./models/recipe";
 import path from "path";
 import fs, { promises } from "fs";
-import bcrypt from 'bcrypt';
 
 // and add this after all the app.use() statements
 connect("cook");
 
 const router = express.Router();
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-//const path = require('path');
-//const fs = require('fs').promises; // Use promises API for fs
 
 app.use(cors());
-// app.use(express.json());
 app.use(express.json({ limit: "500kb" }));
 
 const indexHtml = require.resolve("lit-frontend"); 
 const dist = path.dirname(indexHtml);
 
-app.use("/api", router);
 // static assets: /styles, /images, /icons, etc. 
 app.use(express.static(dist)); 
+
 // SPA routes: /app/... 
 app.use("/app", (req, res) => { 
   promises.readFile(indexHtml, { encoding: "utf8" }) 
     .then((html: any) => res.send(html)); 
 });
 
-app.get("/hello", (req: Request, res: Response) => {
-    res.send("Hello, World");
-});
 
-app.get("/api/profiles/:email", (req: Request, res: Response) => {
+/*
+router.get("/profiles/:email", (req: Request, res: Response) => {
   const { email } = req.params;
 
   profiles
@@ -48,8 +43,9 @@ app.get("/api/profiles/:email", (req: Request, res: Response) => {
     .then((profile: Profile) => res.json(profile))
     .catch((err) => res.status(404).end());
 });
+*/
 
-app.post("/api/profiles/auth", (req: Request, res: Response) => {
+router.post("/profiles/auth", (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   profiles
@@ -58,7 +54,7 @@ app.post("/api/profiles/auth", (req: Request, res: Response) => {
     .catch((err) => res.status(404).end());
 });
 
-app.post("/api/profiles", (req: Request, res: Response) => {
+router.post("/profiles", (req: Request, res: Response) => {
   const newProfile = req.body;
 
   profiles
@@ -68,7 +64,7 @@ app.post("/api/profiles", (req: Request, res: Response) => {
 });
 
 
-app.put("/api/profiles/:email", (req: Request, res: Response) => {
+router.put("/profiles/:email", (req: Request, res: Response) => {
   const { email } = req.params;
   const newProfile = req.body;
 
@@ -78,7 +74,7 @@ app.put("/api/profiles/:email", (req: Request, res: Response) => {
     .catch((err) => res.status(404).end());
 });
 
-app.put("/api/profiles/:email/recipe", (req: Request, res: Response) => {
+router.put("/profiles/:email/recipe", (req: Request, res: Response) => {
   const { email } = req.params;
   const { recipeId } = req.body;
 
@@ -88,7 +84,7 @@ app.put("/api/profiles/:email/recipe", (req: Request, res: Response) => {
     .catch((err) => res.status(404).end());
 });
 
-app.put("/api/profiles/:email/remove-recipe", (req: Request, res: Response) => {
+router.put("/profiles/:email/remove-recipe", (req: Request, res: Response) => {
   const { email } = req.params;
   const { recipeId } = req.body;
 
@@ -98,14 +94,14 @@ app.put("/api/profiles/:email/remove-recipe", (req: Request, res: Response) => {
     .catch((err) => res.status(404).end());
 });
 
-app.get("/api/recipes", (req: Request, res: Response) => {
+router.get("/recipes", (req: Request, res: Response) => {
   recipes
     .index()
     .then((recipes: Recipe[]) => res.json(recipes))
     .catch((err) => res.status(404).end());
 });
 
-app.get("/api/recipes/:id", (req: Request, res: Response) => {
+router.get("/recipes/:id", (req: Request, res: Response) => {
   const { id } = req.params;
 
   recipes
@@ -119,7 +115,7 @@ app.get("/api/recipes/:id", (req: Request, res: Response) => {
     .catch((err) => res.status(404).end());
 });
 
-app.post("/api/recipes", (req: Request, res: Response) => {
+router.post("/recipes", (req: Request, res: Response) => {
   const newRecipe = req.body;
 
   recipes
@@ -128,7 +124,7 @@ app.post("/api/recipes", (req: Request, res: Response) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.get('/api/recipes/search/:term', (req: Request, res: Response) => {
+router.get('/recipes/search/:term', (req: Request, res: Response) => {
   const { term } = req.params;
   recipes
     .searchRecipes(term)
@@ -137,6 +133,9 @@ app.get('/api/recipes/search/:term', (req: Request, res: Response) => {
 });
 
 
+
+
+app.use("/api", router);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

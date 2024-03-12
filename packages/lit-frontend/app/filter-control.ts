@@ -65,7 +65,6 @@ export class FilterControl extends LitElement {
   firstUpdated() {
     const slotElement = this.shadowRoot?.querySelector('slot[name="item"]');
     if (slotElement) { // Check if slotElement is not null
-      console.log("good")
     } else {
       // Handle the case where the slot element is not found, if necessary
       console.warn('Slot element not found.');

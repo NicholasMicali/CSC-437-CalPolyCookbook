@@ -2,6 +2,8 @@ import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import {Router} from '@vaadin/router';
 import { store } from "./store";
+import "./toggle-switch";
+import "./drop-down";
 
 
 @customElement("header-nav")
