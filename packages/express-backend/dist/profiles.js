@@ -32,21 +32,39 @@ __export(profiles_exports, {
 });
 module.exports = __toCommonJS(profiles_exports);
 var import_profile2 = __toESM(require("./models/mongo/profile"));
+const bcrypt = require("bcrypt");
 function index() {
   return import_profile2.default.find();
 }
-function get(userid) {
-  return import_profile2.default.find({ userid }).then((list) => list[0]).catch((err) => {
-    throw `${userid} Not Found`;
+function get(email) {
+  return import_profile2.default.find({ email }).then((list) => list[0]).catch((err) => {
+    throw `${email} Not Found`;
   });
 }
-function create(profile) {
+async function create(profile) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(profile.password, salt);
+  profile.password = hashedPassword;
   const p = new import_profile2.default(profile);
   return p.save();
 }
-function update(userid, profile) {
+function auth(email, password) {
+  return import_profile2.default.findOne({ email }).exec().then((user) => {
+    if (!user) {
+      return Promise.reject("User not found");
+    }
+    return bcrypt.compare(password, user.password).then((doMatch) => {
+      if (doMatch) {
+        return user;
+      } else {
+        return Promise.reject("Incorrect password");
+      }
+    });
+  });
+}
+function update(email, profile) {
   return new Promise((resolve, reject) => {
-    import_profile2.default.findOneAndUpdate({ userid }, profile, {
+    import_profile2.default.findOneAndUpdate({ email }, profile, {
       new: true
     }).then((profile2) => {
       if (profile2)
@@ -56,4 +74,38 @@ function update(userid, profile) {
     });
   });
 }
-var profiles_default = { index, get, create, update };
+function addRecipeToProfile(email, recipeId) {
+  return new Promise((resolve, reject) => {
+    import_profile2.default.findOneAndUpdate(
+      { email },
+      { $push: { recipes: recipeId } },
+      { new: true }
+    ).then((updatedProfile) => {
+      console.log("Updated profile with new recipe:", updatedProfile);
+      if (updatedProfile)
+        resolve(updatedProfile);
+      else
+        reject("Failed to find profile to update");
+    }).catch((err) => {
+      console.error("Error updating profile with new recipe:", err);
+    });
+  });
+}
+function removeRecipeFromProfile(email, recipeId) {
+  return new Promise((resolve, reject) => {
+    import_profile2.default.findOneAndUpdate(
+      { email },
+      { $pull: { recipes: recipeId } },
+      { new: true }
+    ).then((updatedProfile) => {
+      console.log("Updated profile to remove recipe:", updatedProfile);
+      if (updatedProfile)
+        resolve(updatedProfile);
+      else
+        reject("Failed to find profile to update");
+    }).catch((err) => {
+      console.error("Error updating profile", err);
+    });
+  });
+}
+var profiles_default = { index, get, create, update, addRecipeToProfile, removeRecipeFromProfile, auth };

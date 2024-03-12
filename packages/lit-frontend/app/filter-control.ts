@@ -2,7 +2,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, queryAssignedElements } from "lit/decorators.js";
 import { FilterableComponent } from "./FilterableComponent";
-import { CuisineCard } from "./cuisine-card";
+
 
 @customElement("filter-control")
 export class FilterControl extends LitElement {
@@ -11,32 +11,53 @@ export class FilterControl extends LitElement {
 
   static styles = css`
     :host {
-      margin-top: 10px;
+      margin-top: 40px;
       display: block;
+      margin-bottom: 100px;
     }
 
-    .cuisineRow {
+    .row {
       display: grid;
       justify-content: space-between;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 100px;
+      gap: 75px;
       margin-top: 20px;
-      margin-left: 25px;
+      margin-left: 20px;
+      margin-right: 20px
+    }
+
+    .filter {
+      margin-top: 15px;
+      margin-left: 20px;
+      margin-rigth: 20px;
     }
 
     input {
-      width: 200px;
-      margin-top: 20px;
-      margin-left: 25px;
+      width: 380px;
+      margin-left: 20px;
+      margin-bottom: 20px;
+      padding: 5px;
+      font-size: 16px;
+      border: 2px solid darkGreen;
+      border-radius: 4px;
     }
-
+    
+    h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-left: 20px;
+      margin-top: 20px;
+    }
   `;
 
   render() {
     return html`
-      <input type="text" @input="${this.filterItems}" placeholder="Search...">
-      <div class="cuisineRow">
-        <slot name="item"></slot>
+      <div class="filter">
+        <div><h2 class="secHead">Filter Results:<h2></div>
+        <input type="text" @input="${this.filterItems}" placeholder="Search...">
+        <div class="row">
+          <slot name="item"></slot>
+        </div>
       </div>
     `;
   }

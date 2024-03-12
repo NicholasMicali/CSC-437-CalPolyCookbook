@@ -87,4 +87,4 @@ class ToggleSwitchElement extends LitElement {
       });
     }
   }
-}
+} export default ToggleSwitchElement;

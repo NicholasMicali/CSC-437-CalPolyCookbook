@@ -1,6 +1,8 @@
 // src/rest.ts
-const API_ROOT = "http://localhost:3000/api";
+//const API_ROOT = "http://localhost:3000/api";
+
+const SERVER_ROOT = window.location.origin;
 
 export function serverPath(path: string) {
-  return `${API_ROOT}${path}`;
+  return `${SERVER_ROOT}${path}`;
 }

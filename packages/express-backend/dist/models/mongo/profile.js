@@ -24,11 +24,10 @@ module.exports = __toCommonJS(profile_exports);
 var import_mongoose = require("mongoose");
 const profileSchema = new import_mongoose.Schema(
   {
-    userid: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, trim: true },
     name: { type: String, required: true, trim: true },
-    nickname: { type: String, trim: true },
-    city: { type: String, trim: true },
-    recipes: [String]
+    password: { type: String, required: true, trim: true },
+    recipes: [{ type: import_mongoose.Schema.Types.ObjectId, ref: "Recipe" }]
   },
   { collection: "user_profiles" }
 );

@@ -92,3 +92,4 @@ class DropDownElement extends LitElement {
     }
   }
 }
+export { DropDownElement };
