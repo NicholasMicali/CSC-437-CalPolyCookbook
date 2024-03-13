@@ -31,7 +31,7 @@ var import_fs = require("fs");
 (0, import_mongoConnect.connect)("cook");
 const router = import_express.default.Router();
 const app = (0, import_express.default)();
-const port = process.env.PORT || 3e3;
+const port = process.env.PORT || 8080;
 app.use((0, import_cors.default)());
 app.use(import_express.default.json({ limit: "500kb" }));
 const indexHtml = require.resolve("lit-frontend");
