@@ -27,18 +27,16 @@ var import_mongoConnect = require("./mongoConnect");
 var import_profiles = __toESM(require("./profiles"));
 var import_recipes = __toESM(require("./recipes"));
 var import_path = __toESM(require("path"));
-var import_fs = require("fs");
 (0, import_mongoConnect.connect)("cook");
 const router = import_express.default.Router();
 const app = (0, import_express.default)();
 const port = process.env.PORT || 8080;
 app.use((0, import_cors.default)());
 app.use(import_express.default.json({ limit: "500kb" }));
-const indexHtml = require.resolve("lit-frontend");
-const dist = import_path.default.dirname(indexHtml);
-app.use(import_express.default.static(dist));
-app.use("/app", (req, res) => {
-  import_fs.promises.readFile(indexHtml, { encoding: "utf8" }).then((html) => res.send(html));
+const frontendDistPath = import_path.default.join(__dirname, "..", "..", "lit-frontend", "dist");
+app.use(import_express.default.static(frontendDistPath));
+app.get("/app*", (req, res) => {
+  res.sendFile(import_path.default.join(frontendDistPath, "index.html"));
 });
 router.post("/profiles/auth", (req, res) => {
   const { email, password } = req.body;

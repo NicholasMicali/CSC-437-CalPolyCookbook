@@ -21,6 +21,7 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json({ limit: "500kb" }));
 
+/*
 const indexHtml = require.resolve("lit-frontend"); 
 const dist = path.dirname(indexHtml);
 
@@ -32,7 +33,14 @@ app.use("/app", (req, res) => {
   promises.readFile(indexHtml, { encoding: "utf8" }) 
     .then((html: any) => res.send(html)); 
 });
+*/
+const frontendDistPath = path.join(__dirname, '..', '..', 'lit-frontend', 'dist');
 
+app.use(express.static(frontendDistPath));
+
+app.get("/app*", (req, res) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
+});
 
 /*
 router.get("/profiles/:email", (req: Request, res: Response) => {
