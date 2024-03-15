@@ -5,7 +5,7 @@ import { FilterableComponent } from "./FilterableComponent";
 
 @customElement("cuisine-card")
 export class CuisineCard extends LitElement implements FilterableComponent {
-  @property({ type: String }) text: string = "";
+  @property({ type: String }) title: string = "";
   @property({ type: String }) imageUrl: string = "";
 
   @property({ type: String }) link: string = "";
@@ -50,7 +50,7 @@ export class CuisineCard extends LitElement implements FilterableComponent {
   `;
 
   getFilterableValue(): string {
-    return this.text;
+    return this.title;
   }
 
   setVisible(visible: boolean): void {
@@ -60,9 +60,9 @@ export class CuisineCard extends LitElement implements FilterableComponent {
   render() {
     return html`
       <a href="${this.link}">
-        <img src="${this.imageUrl}" alt="${this.text}">
+        <img src="${this.imageUrl}" alt="${this.title}">
         <div class="content">
-          <div class="title">${this.text}</div>
+          <div class="title">${this.title}</div>
         </div>
       </a>
     `;

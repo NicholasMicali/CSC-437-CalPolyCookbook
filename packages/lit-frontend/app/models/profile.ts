@@ -1,8 +1,8 @@
 // src/models/profile.ts
 export interface Profile {
-  userid: string;
+  email: string;
   name: string;
-  nickname?: string;
-  city?: string;
+  password: string;
   recipes: string[];
 }
+
